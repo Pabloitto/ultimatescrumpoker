@@ -10,7 +10,7 @@
 			socket = io.connect("http:127.0.0.1:8081");
 			socket.emit('start',$scope.roomId);
 			bindEvents();
-		};
+		}
 
 		function join(){
 			var userToJoin = {
@@ -22,7 +22,7 @@
 			$scope.joined = true;
 			$scope.users.push(userToJoin);
 			socket.emit('joined',$scope.roomId, userToJoin);
-		};
+		}
 
 		function estimate(points){
 			socket.emit('estimate',$scope.roomId, points);
@@ -56,10 +56,10 @@
 							fliped : users[user].fliped
 						});
 					}
-				};
+				}
 		    	$scope.users = result;
 		    });
-		};
+		}
 
 		function bindEvents(){
 			$scope.join = join;
@@ -69,11 +69,12 @@
 
 			socket.on('update',onJoinUser);
 			socket.on('onStart',onJoinUser);
-		};
+		}
 
 
 		init();
 	};
 
 	$.App.ScrumPoker.controller('EstimationController',EstimationController);
+
 }());

@@ -21,7 +21,6 @@
                 });
 	});
 
-
     $.roomNumber = function(current){
         var n = Math.floor(Math.random() * 5000);
         if(n === current){
@@ -38,4 +37,5 @@
         }
         return index;
     };
+
 }(jQuery));

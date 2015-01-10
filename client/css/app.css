@@ -1,0 +1,72 @@
+body{
+	margin: 0;
+}
+.logo{
+	width: 100%;
+	height: 160px;
+	background-image: url("../img/logo.png");
+	background-repeat: no-repeat;
+}
+.row-top-margin { 
+	margin-top:15px; 
+}
+ .card {
+    display: inline-block;
+    width: 2em;
+    height: 3em;
+    margin: 0;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+       -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #A2A2A2;
+    position: relative;
+    -webkit-border-radius: 0.2em;
+            border-radius: 0.2em;
+    background-color: #337ab7;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    line-height: 3em;
+    cursor: pointer;
+    float: none;
+  }
+ .card:hover,
+ .card:focus {
+ 	background-color: #286090;
+    background-position: 0 -30px;
+    border-color: transparent;
+    -webkit-transition: background-position 0.1s ease;
+       -moz-transition: background-position 0.1s ease;
+        -ms-transition: background-position 0.1s ease;
+         -o-transition: background-position 0.1s ease;
+            transition: background-position 0.1s ease;
+  }
+   .card-small {
+    display: inline-block;
+    width: 2em;
+    height: 3em;
+    margin: 0;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+       -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #A2A2A2;
+    position: relative;
+    -webkit-border-radius: 0.2em;
+            border-radius: 0.2em;
+    background-color: #337ab7;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    line-height: 3em;
+    float: none;
+  }
+  span.waiting{
+  	background-image: url("../img/loader.gif");
+  	background-repeat: no-repeat;
+  	padding-left: 20px;
+  }

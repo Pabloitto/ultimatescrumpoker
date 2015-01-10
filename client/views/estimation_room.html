@@ -1,0 +1,36 @@
+
+<div ng-show="!joined">
+        <h2 class="form-signin-heading">Enter to room {{roomId}}</h2>
+        <label for="txtName" class="sr-only">Name</label>
+        <input type="text" id="txtName" ng-model="name" name="name" class="form-control" placeholder="name" required="" autofocus="">
+        <button class="btn btn-lg btn-primary btn-block" ng-click="join()">Join</button>
+</div>
+<div ng-show="joined" class="container-fluid ng-hide">
+	<div class="row">
+		<b>Your current estimation : </b>
+		<div class="card-small">
+			{{currentEstimation}}
+		</div>
+	</div>
+	<div class="row">
+		<h3>Welcome to room {{roomId}} {{name}}</h3>
+		<input type="button" class="btn" value="Flip cards" ng-click="flipCards()"/>
+		<input type="button" class="btn" value="Clear estimations" ng-click="cleanEstimations()"/>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="card col-md-4" ng-click="estimate('S')">S</div>
+		  		<div class="card col-md-4" ng-click="estimate('M')">M</div>
+		  		<div class="card col-md-4" ng-click="estimate('L')">L</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-repeat="user in users">
+		<b>{{user.name}}:</b>
+		<span ng-show="!user.estimation" ng-class="{waiting: user.estimation==''}">&nbsp</span>
+		<div class="card-small" ng-show="user.estimation">
+			{{user.estimation}}
+		</div>
+	</div>
+</div>

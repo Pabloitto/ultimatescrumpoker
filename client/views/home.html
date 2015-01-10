@@ -1,0 +1,13 @@
+<div ng-controller="HomeController">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-4">
+			<div class="logo"></div>
+		</div>
+	</div>
+	<div class="row row-top-margin">
+		<div class="col-md-12">
+        <input type="text" id="txtRoom" ng-model="roomId" name="roomId" class="form-control" placeholder="Room" required="" autofocus="">
+			<a class="btn btn-lg btn-primary btn-block" href="{{getRoom()}}">Go!!!</a>
+		</div>
+	</div>
+</div>

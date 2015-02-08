@@ -4,7 +4,7 @@
 
 	$.App.ScrumPoker = angular.module('ScrumPoker', ['ngRoute']);
 
-	$.App.ScrumPoker.config(function($routeProvider,$locationProvider){
+	$.App.ScrumPoker.config(function($routeProvider){
 		        $routeProvider.when('/', {
                         templateUrl : '/views/home.html',
                         controller  : 'HomeController'
@@ -21,12 +21,8 @@
                 });
 	});
 
-    $.roomNumber = function(current){
-        var n = Math.floor(Math.random() * 5000);
-        if(n === current){
-            current = $.roomNumber(current);
-        }
-        return n;
+    $.roomNumber = function(){
+        return Math.floor(Math.random() * 5000);
     };
 
     $.getRoom = function(){

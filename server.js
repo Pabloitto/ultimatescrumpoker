@@ -6,12 +6,15 @@
 		router = express(),
 		server = http.createServer(router),
 		io = socket.listen(server),
-		roomController = require('roomController');
+		RoomController = require('roomController');
 
 
 	router.use(express.static(path.resolve(__dirname, 'client')));
 
 	io.on('connection', function (client) {
+
+		var roomController = new RoomController();
+
 		roomController.connect(client);
 
 		client.on('start', function(roomId){
@@ -31,6 +34,9 @@
 		});
 		client.on('disconnect', function() {
 			roomController.leaveRoom();
+		});
+		client.on('setDeckInRoom', function(roomId,deck) {
+			roomController.setDeckInRoom(roomId,deck);
 		});
 	});
 

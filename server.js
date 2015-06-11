@@ -13,12 +13,6 @@
 
 	router.use(express.static(path.resolve(__dirname, 'client')));
 
-	router.get("/api/root",function(request,response){
-		var address = request.get('host');
-		console.log(address);
-		response.send(address);
-	});
-
 	io.on('connection', function (client) {
 
 		var roomController = new RoomController();
@@ -48,14 +42,15 @@
 		});
 	});
 
-	/*server.listen(process.env.PORT || 8081, process.env.IP || "127.0.0.1", function(){
+	/*router.set('port', (process.env.PORT || 5000));
+    
+    router.listen(router.get('port'), function() {
+    	console.log('Node app is running on port', router.get('port'));
+    });*/
+
+	server.listen(process.env.PORT || 5000, function(){
 	  var address = server.address();
 	  console.log("Server is listening at", address.address + ":" + address.port);
-	});*/
-
-	 router.set('port', (process.env.PORT || 5000));
-     router.listen(router.get('port'), function() {
-          console.log('Node app is running on port', router.get('port'));
-     });
+	});
 
 }());

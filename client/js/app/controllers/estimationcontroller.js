@@ -10,6 +10,8 @@
 			$scope.joined = false;
 			$scope.currentEstimation = '';
 			$scope.roomId = $.getRoom();
+			//socket = io.connect("http:127.0.0.1:8081");
+			socket = io.connect(window.location.hostname);
 			socket.emit('start',$scope.roomId);
 			bindEvents();
 		}
@@ -110,11 +112,8 @@
 			return $.App.Deck[deck].Cards;
 		}
 
-		$.get("/api/root",function(data){
-			debugger;
-			socket = io.connect(data);
-			init();
-		});
+
+		init();
 	};
 
 	$.App.ScrumPoker.controller('EstimationController',EstimationController);

@@ -13,6 +13,12 @@
 
 	router.use(express.static(path.resolve(__dirname, 'client')));
 
+	router.get("/api/root",function(request,response){
+		var address = server.address().address + ":" + server.address().port;
+		console.log(address);
+		response.send(address);
+	});
+
 	io.on('connection', function (client) {
 
 		var roomController = new RoomController();

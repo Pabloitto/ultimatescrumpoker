@@ -8,7 +8,7 @@
 		router = express(),
 		server = http.createServer(router),
 		io = socket.listen(server),
-		RoomController = require('roomController');
+		RoomController = require('./server/roomController');
 
 
 	router.use(express.static(path.resolve(__dirname, 'client')));

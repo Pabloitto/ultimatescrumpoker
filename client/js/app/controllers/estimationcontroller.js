@@ -11,8 +11,8 @@
 			$scope.joined = false;
 			$scope.currentEstimation = '';
 			$scope.roomId = $.getRoom();
-			socket = io.connect("http://localhost:5000");
-			// socket = io.connect(window.location.hostname);
+			// socket = io.connect("http://localhost:5000");
+			socket = io.connect(window.location.hostname);
 			socket.emit('start', $scope.roomId);
 			bindEvents();
 		}

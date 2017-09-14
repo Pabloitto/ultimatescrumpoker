@@ -1,7 +1,7 @@
 <div ng-show="!joined">
 	<div class="row row-top-margin">
 		<div class="col-md-12">
-        	<h2 class="form-signin-heading">Enter to room {{roomId}}</h2>
+			<h2 class="form-signin-heading">Enter to room {{roomId}}</h2>
 			<label for="txtName" class="sr-only">Name</label>
 			<input type="text" id="txtName" ng-model="name" name="name" class="form-control" placeholder="name" required="" autofocus="">
 			<button class="btn btn-lg btn-primary btn-block" ng-click="join()">Join</button>
@@ -9,11 +9,13 @@
 	</div>
 </div>
 <div ng-show="joined" class="container-fluid ng-hide">
-	<header><h1><b>Welcome to room {{roomId}} {{name}}</b></h1></header>
+	<header>
+		<h3><b>Welcome to room {{roomId}} {{name}}</b></h3>
+	</header>
 	<div class="row row-top-margin">
 		<div class="col-md-12">
 			<label>Deck :</label>
-			<select class="dropdown-deck"  ng-model="selectedDeck" ng-change="changeDeck()">
+			<select class="dropdown-deck" ng-model="selectedDeck" ng-change="changeDeck()">
 				<option ng-repeat="deck in decks" ng-attr-value="{{deck}}">{{deck}}</option>
 			</select>
 		</div>
@@ -23,7 +25,7 @@
 			<div class="row row-top-margin">
 				<div class="col-md-9">
 					<div ng-repeat="card in cards" class="card-container">
-						<div  class="card col-md-4" ng-click="estimate(card)">{{card}}</div>
+						<div class="card col-md-4" ng-click="estimate(card)">{{card}}</div>
 					</div>
 				</div>
 			</div>
@@ -36,14 +38,30 @@
 				</div>
 			</div>
 			<div class="row row-top-margin">
-				<input type="button" class="btn" value="Flip cards" ng-click="flipCards()"/>
-				<input type="button" class="btn" value="Clear estimations" ng-click="cleanEstimations()"/>
+				<input type="button" class="btn btn-primary" value="Flip cards" ng-click="flipCards()" />
+				<input type="button" class="btn btn-success" value="Clear estimations" ng-click="cleanEstimations()"
+				/>
 			</div>
-			<div class="row row-top-margin" ng-repeat="user in users">
-				<label>{{user.name}}:</label>
-				<span ng-show="!user.estimation" ng-class="{waiting: user.estimation==''}">&nbsp</span>
-				<div class="card-small" ng-show="user.estimation">
-					{{user.estimation}}
+			<div class="row row-top-margin">
+				<ul class="list-group custom-width">
+					<li class="list-group-item" ng-repeat="user in users">
+						<label>{{user.name}}&nbsp:</label>
+						<span class='pull-right' ng-show="!user.estimation" ng-class="{waiting: user.estimation==''}">&nbsp</span>
+						<div class="pull-right card-small" ng-show="user.estimation">
+							{{user.estimation}}
+						</div>
+					</li>
+				</ul>
+				<div ng-if="allAreEstimated()">
+					<label>Points</label>
+					<ul class="list-group custom-width">
+						<li class="list-group-item" ng-repeat="card in points">
+							<div class="card-small">
+								{{card.points}}
+							</div>
+							<span class='pull-right'>{{card.count}}</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

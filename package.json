@@ -5,9 +5,20 @@
   "main": "server.js",
   "repository": "",
   "author": "Juan Itto",
+  "scripts": {
+    "start": "nodemon server"
+  },
   "dependencies": {
-    "async": "~0.2.8",
-    "express": "~3.2.4",
-    "socket.io": "~0.9.14"
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "client",
+      "node_modules"
+    ]
   }
 }

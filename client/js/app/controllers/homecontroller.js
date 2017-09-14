@@ -1,11 +1,11 @@
-(function(){
-	$.App.ScrumPoker.controller('HomeController',function($scope){
-		
-		$scope.roomId = $.roomNumber();
+(function () {
+	$.App.ScrumPoker.controller('HomeController', function ($scope) {
 
-		$scope.getRoom = function(){
-			return "#/estimation_room?" + ($scope.roomId);
-		};
+		$scope.roomName = ''
 
-	});
-}());
+		$scope.getRoom = function () {
+			return "#/estimation_room?" + $scope.roomName
+		}
+
+	})
+}())

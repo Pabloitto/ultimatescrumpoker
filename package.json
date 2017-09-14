@@ -6,7 +6,8 @@
   "repository": "",
   "author": "Juan Itto",
   "scripts": {
-    "start": "nodemon server"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "dependencies": {
     "express": "^4.15.4",

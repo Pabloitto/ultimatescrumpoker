@@ -6,13 +6,18 @@
   "repository": "",
   "author": "Juan Itto",
   "scripts": {
-    "start": "standard && nodemon server"
+    "start": "standard && node server",
+    "dev": "standard && nodemon server",
+    "test": "standard && mocha server/tests/*.test.js"
   },
   "dependencies": {
     "express": "^4.15.4",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "sinon": "^6.1.0",
     "standard": "^10.0.3"
   },
   "standard": {
@@ -24,7 +29,9 @@
       "$",
       "io",
       "jQuery",
-      "angular"
+      "angular",
+      "describe",
+      "it"
     ]
   }
 }

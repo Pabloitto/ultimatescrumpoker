@@ -1,8 +1,7 @@
 (function ($) {
-
   $.App = {}
 
-  $.App.ScrumPoker = angular.module('ScrumPoker', ['ngRoute']);
+  $.App.ScrumPoker = angular.module('ScrumPoker', ['ngRoute'])
 
   $.App.ScrumPoker.config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -10,8 +9,8 @@
       controller: 'HomeController'
     })
 
-    $routeProvider.when('/estimation_room/', {
-      templateUrl: '/views/estimation_room.html',
+    $routeProvider.when('/estimation/room/', {
+      templateUrl: '/views/estimation.room.html',
       controller: 'EstimationController'
     })
 
@@ -20,14 +19,10 @@
     })
   })
 
-  $.roomNumber = function () {
-    return Math.floor(Math.random() * 5000)
-  }
-
   $.getRoom = function () {
-    var url = window.location.href
-    var index = null
-    if (url.lastIndexOf('?') != -1) {
+    const url = window.location.href
+    let index = null
+    if (url.lastIndexOf('?') > -1) {
       index = url.split('?')[1]
     }
     return index

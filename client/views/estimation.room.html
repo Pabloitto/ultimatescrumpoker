@@ -1,16 +1,18 @@
 <div ng-show="!joined">
 	<div class="row row-top-margin">
 		<div class="col-md-12">
-			<h2 class="form-signin-heading">Enter to room {{roomId}}</h2>
+			<h2 class="form-signin-heading">Enter {{roomId}}</h2>
 			<label for="txtName" class="sr-only">Name</label>
 			<input type="text" id="txtName" ng-model="name" name="name" class="form-control" placeholder="name" required="" autofocus="">
+			<br />
 			<button class="btn btn-lg btn-primary btn-block" ng-click="join()">Join</button>
 		</div>
 	</div>
 </div>
 <div ng-show="joined" class="container-fluid ng-hide">
 	<header>
-		<h3><b>Welcome to room {{roomId}} {{name}}</b></h3>
+		<h3><b>Welcome to {{roomId}}</b></h3>
+		<h2>{{name}}</h2>
 	</header>
 	<div class="row row-top-margin">
 		<div class="col-md-12">
@@ -31,11 +33,9 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="row row-top-margin">
-				<label>Your current estimation : </label>
-				<div class="card-small">
-					{{currentEstimation}}
-				</div>
+			<div ng-if="currentEstimation" class="row row-top-margin">
+				<label>My estimation : </label>
+				<span>{{currentEstimation}}</span>
 			</div>
 			<div class="row row-top-margin">
 				<input type="button" class="btn btn-primary" value="Flip cards" ng-click="flipCards()" />
@@ -47,21 +47,31 @@
 					<li class="list-group-item" ng-repeat="user in users">
 						<label>{{user.name}}&nbsp:</label>
 						<span class='pull-right' ng-show="!user.estimation" ng-class="{waiting: user.estimation==''}">&nbsp</span>
-						<div class="pull-right card-small" ng-show="user.estimation">
+						<div class="pull-right" ng-show="user.estimation">
 							{{user.estimation}}
 						</div>
 					</li>
 				</ul>
 				<div ng-if="allAreEstimated()">
-					<label>Points</label>
-					<ul class="list-group custom-width">
-						<li class="list-group-item" ng-repeat="card in points">
-							<div class="card-small">
-								{{card.points}}
-							</div>
-							<span class='pull-right'>{{card.count}}</span>
-						</li>
-					</ul>
+					<label>Summary:</label>
+					<table class="table custom-width">
+						<thead>
+							<tr>
+								<th>Points</th>
+								<th>Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="card in points">
+								<td>
+									<span>{{card.points}}</span>
+								</td>
+								<td>
+									<span>{{card.count}}</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

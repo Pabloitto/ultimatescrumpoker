@@ -1,12 +1,12 @@
 {
-  "name": "ScrumPoker",
-  "version": "0.0.0",
+  "name": "ultimate-scrum-poker",
+  "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "repository": "",
   "author": "Juan Itto",
   "scripts": {
-    "start": "nodemon server"
+    "start": "standard && nodemon server"
   },
   "dependencies": {
     "express": "^4.15.4",
@@ -17,8 +17,14 @@
   },
   "standard": {
     "ignore": [
-      "client",
+      "client/js/lib",
       "node_modules"
+    ],
+    "globals": [
+      "$",
+      "io",
+      "jQuery",
+      "angular"
     ]
   }
 }

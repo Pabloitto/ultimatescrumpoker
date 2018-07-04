@@ -4,13 +4,18 @@ const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
+const rooms = {}
+
 const { EstimationRoomService } = require('./server/src/services/estimation-room')
 
 app.use(express.static(path.resolve(__dirname, 'client')))
 
 io.on('connection', client => {
   console.info('Client connected', client.id)
-  const estimationRoom = EstimationRoomService({ client })
+  const estimationRoom = EstimationRoomService({
+    client,
+    rooms
+  })
   client.on('start', estimationRoom.init)
   client.on('joined', estimationRoom.join)
   client.on('estimate', estimationRoom.estimate)

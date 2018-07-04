@@ -68,4 +68,45 @@ describe('Estimation room tests: ', () => {
     chai.expect(broadcastFirstCall[0]).to.equal('update')
     chai.expect(broadcastFirstCall[1]).to.equal(JSON.stringify(expectedValue))
   })
+  it('should send the estimation to the room', () => {
+    const broadcastCallBack = sinon.stub()
+    const rooms = {
+      '1': {
+        roomId: '1',
+        users: {
+          '123456': { name: 'x' }
+        }
+      }
+    }
+    const client = {
+      id: '123456',
+      broadcast: {
+        to: () => ({
+          emit: broadcastCallBack
+        })
+      },
+      emit: sinon.stub()
+    }
+    const expectedValue = {
+      roomId: '1',
+      users: {
+        '123456': {
+          name: 'x',
+          estimation: 8,
+          flipped: false
+        }
+      }
+    }
+    const estimationRoom = EstimationRoomService({
+      client,
+      rooms
+    })
+    estimationRoom.estimate('1', 8)
+    const [ emitFirstCall ] = client.emit.args
+    chai.expect(emitFirstCall[0]).to.equal('update')
+    chai.expect(emitFirstCall[1]).to.equal(JSON.stringify(expectedValue))
+    const [ broadcastFirstCall ] = broadcastCallBack.args
+    chai.expect(broadcastFirstCall[0]).to.equal('update')
+    chai.expect(broadcastFirstCall[1]).to.equal(JSON.stringify(expectedValue))
+  })
 })

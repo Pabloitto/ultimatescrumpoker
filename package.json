@@ -11,7 +11,7 @@
     "test": "standard && mocha server/tests/*.test.js"
   },
   "dependencies": {
-    "express": "^4.15.4",
+    "express": "^4.16.4",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {

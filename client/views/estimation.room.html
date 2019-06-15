@@ -1,9 +1,20 @@
 <div ng-show="!joined">
 	<div class="row row-top-margin">
 		<div class="col-md-12">
-			<h2 class="form-signin-heading">Enter {{roomId}}</h2>
+			<h2 class="form-signin-heading">
+				Join to room: <i>{{roomId}}</i>
+			</h2>
 			<label for="txtName" class="sr-only">Name</label>
-			<input type="text" id="txtName" ng-model="name" name="name" class="form-control" placeholder="name" required="" autofocus="">
+			<input
+				type="text"
+				id="txtName"
+				ng-model="name"
+				name="name"
+				class="form-control"
+				placeholder="name"
+				required=""
+				autofocus=""
+				maxlength="50" />
 			<br />
 			<button class="btn btn-lg btn-primary btn-block" ng-click="join()">Join</button>
 		</div>
@@ -11,8 +22,7 @@
 </div>
 <div ng-show="joined" class="container-fluid ng-hide">
 	<header>
-		<h3><b>Welcome to {{roomId}}</b></h3>
-		<h2>{{name}}</h2>
+		<h3>Welcome to <i>{{roomId}} {{name}}</i></h3><br>
 	</header>
 	<div class="row row-top-margin">
 		<div class="col-md-12">
@@ -45,7 +55,7 @@
 			<div class="row row-top-margin">
 				<ul class="list-group custom-width">
 					<li class="list-group-item" ng-repeat="user in users">
-						<label>{{user.name}}&nbsp:</label>
+						<label class='user-name'>{{user.name}}&nbsp</label>
 						<span class='pull-right' ng-show="!user.estimation" ng-class="{waiting: user.estimation==''}">&nbsp</span>
 						<div class="pull-right" ng-show="user.estimation">
 							{{user.estimation}}

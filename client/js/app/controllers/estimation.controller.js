@@ -6,12 +6,12 @@
       $scope.users = []
       $scope.points = []
       $scope.decks = getDecks()
-      $scope.selectedDeck = 'Standard'
+      $scope.selectedDeck = 'Fibonnacci'
       $scope.cards = []
       $scope.joined = false
       $scope.currentEstimation = ''
-      $scope.roomId = $.getRoom()
-      socket = io.connect('http://localhost:5000')
+      $scope.roomId = decodeURI($.getRoom())
+      socket = io.connect(window.location.origin)
       socket.emit('start', $scope.roomId)
       bindEvents()
     }
@@ -127,9 +127,9 @@
     }
 
     function getDecks () {
-      var decksArray = []
-      for (var p in $.App.Deck) {
-        decksArray.push(p)
+      const decksArray = []
+      for (const deck in $.App.Deck) {
+        decksArray.push(deck)
       }
       return decksArray
     }

@@ -86,3 +86,8 @@ body{
   .custom-width {
     width: 225px;
   }
+
+  label.user-name {
+    max-width: 50%;
+    word-break: break-word;
+  }

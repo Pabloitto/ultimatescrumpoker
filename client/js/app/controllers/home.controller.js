@@ -3,7 +3,7 @@
     $scope.roomName = ''
 
     $scope.getRoom = function () {
-      return '#/estimation/room?' + $scope.roomName
+      return encodeURI('#/estimation/room?' + $scope.roomName)
     }
   })
 }())

@@ -25,7 +25,7 @@ const EstimationRoomService = ({
   const join = async (roomId, clientJoined) => {
     const room = await RoomModel.findOne({ roomId })
 
-    const user = room.users.find(user => user.name === clientJoined.name)
+    const user = room.users.find(user => user.clientId === clientJoined.id)
 
     if (!user) {
       room.users.push({
@@ -34,10 +34,6 @@ const EstimationRoomService = ({
         flipped: clientJoined.flipped,
         clientId: client.id
       })
-    } else {
-      user.estimation = clientJoined.estimation
-      user.flipped = clientJoined.flipped
-      user.clientId = client.id
     }
 
     await room.save()

@@ -13,7 +13,6 @@ const User = new Schema({
 
 const Room = new Schema({
   roomId: { type: String, required: true },
-  deck: { type: String },
   users: [ User ]
 }, {
   timestamps: true

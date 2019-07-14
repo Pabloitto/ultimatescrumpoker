@@ -111,15 +111,8 @@ const EstimationRoomService = ({
   }
 
   const setDeckInRoom = async (roomId, deck) => {
-    const room = await RoomModel.findOne({ roomId })
-
-    room.deck = deck
-
-    await room.save()
-
-    client.emit('removeDeckSelection', room.deck)
-
-    client.broadcast.to(room.roomId).emit('removeDeckSelection', room.deck)
+    client.emit('removeDeckSelection', deck)
+    client.broadcast.to(roomId).emit('removeDeckSelection', deck)
   }
 
   const syncConnection = async (roomId, userName) => {

@@ -96,7 +96,7 @@ const EstimationRoomService = ({
   }
 
   const leaveRoom = async () => {
-    const room = await RoomModel.updateOne({
+    const room = await RoomModel.update({
       $pull: {
         users: {
           clientId: client.id

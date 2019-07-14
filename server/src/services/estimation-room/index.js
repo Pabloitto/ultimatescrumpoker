@@ -106,6 +106,8 @@ const EstimationRoomService = ({
 
     const roomPayload = JSON.stringify(room)
 
+    console.log(roomPayload)
+
     client.emit('update', roomPayload)
     client.broadcast.to(room.roomId).emit('update', roomPayload)
   }

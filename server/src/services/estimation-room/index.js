@@ -96,6 +96,11 @@ const EstimationRoomService = ({
       'users.clientId': client.id
     })
 
+    if (!room) {
+      console.log('Client is not available anymore')
+      return
+    }
+
     room.users = room.users.filter(user => user.clientId !== client.id)
 
     await room.save()

@@ -96,17 +96,15 @@ const EstimationRoomService = ({
   }
 
   const leaveRoom = async () => {
-    const room = await RoomModel.update({
-      $pull: {
-        users: {
-          clientId: client.id
-        }
-      }
+    const room = await RoomModel.findOne({
+      'users.clientId': client.id
     })
 
-    const roomPayload = JSON.stringify(room)
+    room.users = room.users.filter(user => user.clientId !== client.id)
 
-    console.log(roomPayload)
+    await room.save()
+
+    const roomPayload = JSON.stringify(room)
 
     client.emit('update', roomPayload)
     client.broadcast.to(room.roomId).emit('update', roomPayload)

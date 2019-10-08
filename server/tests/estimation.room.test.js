@@ -1,38 +1,65 @@
 const chai = require('chai')
-const should = chai.should()
+
 const sinon = require('sinon')
+
+const { noop } = require('lodash')
 
 const { EstimationRoomService } = require('../src/services/estimation-room')
 
+const should = chai.should()
+
+const sandbox = sinon.createSandbox()
+
+const io = {
+  sockets: {
+    sockets: {}
+  }
+}
+
+const RoomModel = {
+  create: noop,
+  findOne: noop,
+  updateOne: noop
+}
+
 describe('Estimation room tests: ', () => {
+  beforeEach(() => {
+    sandbox.restore()
+  })
   it('should create an instance of estimation room service', () => {
-    const estimationRoom = EstimationRoomService({ client: {} })
+    const estimationRoom = EstimationRoomService({
+      io,
+      client: {},
+      RoomModel
+    })
     should.exist(estimationRoom)
   })
-  it('should init the room', () => {
+  it('should init the room', async () => {
+    const mock = { roomId: '1', users: [] }
     const client = {
-      join: sinon.stub(),
-      emit: sinon.stub()
+      join: sandbox.stub(),
+      emit: sandbox.stub()
     }
-    const estimationRoom = EstimationRoomService({ client })
-    estimationRoom.init('1')
+    sandbox.stub(RoomModel, 'create').returns(mock)
+    const estimationRoom = EstimationRoomService({
+      io,
+      client,
+      RoomModel
+    })
+    await estimationRoom.init('1')
     const [ joinFirstCall ] = client.join.args
     chai.expect(joinFirstCall[0]).to.equal('1')
     const [ emitFirstCall ] = client.emit.args
     chai.expect(emitFirstCall[0]).to.equal('update')
-    chai.expect(emitFirstCall[1]).to.equal(JSON.stringify({
-      roomId: '1',
-      users: {}
-    }))
+    chai.expect(emitFirstCall[1]).to.equal(JSON.stringify(mock))
   })
-  it('should join the user to the room', () => {
-    const rooms = {
-      '1': {
-        roomId: '1',
-        users: {}
-      }
-    }
-    const broadcastCallBack = sinon.stub()
+  it('should join the user to the room', async () => {
+    sandbox.stub(RoomModel, 'findOne').returns({
+      roomId: '1',
+      save: noop,
+      users: []
+    })
+    const broadcastCallBack = sandbox.stub()
     const client = {
       id: '123456',
       broadcast: {
@@ -40,26 +67,28 @@ describe('Estimation room tests: ', () => {
           emit: broadcastCallBack
         })
       },
-      emit: sinon.stub()
+      emit: sandbox.stub()
     }
     const estimationRoom = EstimationRoomService({
+      io,
       client,
-      rooms
+      RoomModel
     })
-    estimationRoom.join('1', {
+    await estimationRoom.join('1', {
       name: 'test',
       estimation: 1,
       flipped: false
     })
     const expectedValue = {
       roomId: '1',
-      users: {
-        '123456': {
+      users: [
+        {
           name: 'test',
           estimation: 1,
-          flipped: false
+          flipped: false,
+          clientId: '123456'
         }
-      }
+      ]
     }
     const [ emitFirstCall ] = client.emit.args
     chai.expect(emitFirstCall[0]).to.equal('update')
@@ -68,16 +97,15 @@ describe('Estimation room tests: ', () => {
     chai.expect(broadcastFirstCall[0]).to.equal('update')
     chai.expect(broadcastFirstCall[1]).to.equal(JSON.stringify(expectedValue))
   })
-  it('should send the estimation to the room', () => {
-    const broadcastCallBack = sinon.stub()
-    const rooms = {
-      '1': {
-        roomId: '1',
-        users: {
-          '123456': { name: 'x' }
-        }
-      }
-    }
+  it('should send the estimation to the room', async () => {
+    const broadcastCallBack = sandbox.stub()
+    sandbox.stub(RoomModel, 'findOne').returns({
+      roomId: '1',
+      save: noop,
+      users: [
+        { name: 'x', clientId: '123456' }
+      ]
+    })
     const client = {
       id: '123456',
       broadcast: {
@@ -85,28 +113,30 @@ describe('Estimation room tests: ', () => {
           emit: broadcastCallBack
         })
       },
-      emit: sinon.stub()
+      emit: sandbox.stub()
     }
     const expectedValue = {
       roomId: '1',
-      users: {
-        '123456': {
+      users: [
+        {
           name: 'x',
           estimation: 8,
-          flipped: false
+          flipped: false,
+          clientId: '123456'
         }
-      }
+      ]
     }
     const estimationRoom = EstimationRoomService({
+      io,
       client,
-      rooms
+      RoomModel
     })
-    estimationRoom.estimate('1', 8)
+    await estimationRoom.estimate('1', 8)
     const [ emitFirstCall ] = client.emit.args
     chai.expect(emitFirstCall[0]).to.equal('update')
-    chai.expect(emitFirstCall[1]).to.equal(JSON.stringify(expectedValue))
+    chai.expect(JSON.parse(emitFirstCall[1])).to.deep.equal(expectedValue)
     const [ broadcastFirstCall ] = broadcastCallBack.args
     chai.expect(broadcastFirstCall[0]).to.equal('update')
-    chai.expect(broadcastFirstCall[1]).to.equal(JSON.stringify(expectedValue))
+    chai.expect(JSON.parse(broadcastFirstCall[1])).to.deep.equal(expectedValue)
   })
 })

@@ -6,12 +6,16 @@
   "repository": "",
   "author": "Juan Itto",
   "scripts": {
-    "start": "standard && node server",
-    "dev": "standard && nodemon server",
-    "test": "standard && mocha server/tests/*.test.js"
+    "start": "standard && NODE_ENV=prod node server",
+    "dev": "standard && NODE_ENV=dev nodemon server",
+    "test": "standard && NODE_ENV=test mocha server/tests/*.test.js"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "express": "^4.16.4",
+    "glob": "^7.1.4",
+    "lodash": "^4.17.14",
+    "mongoose": "^5.6.0",
     "socket.io": "^2.1.1",
     "standard": "^12.0.1"
   },
@@ -32,7 +36,8 @@
       "jQuery",
       "angular",
       "describe",
-      "it"
+      "it",
+      "beforeEach"
     ]
   }
 }

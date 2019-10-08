@@ -113,6 +113,11 @@
       }
     }
 
+    function onReconnect (attempt) {
+      console.log('Reconnecting...', attempt)
+      socket.emit('syncConnection', $scope.roomId, $scope.name)
+    }
+
     function bindEvents () {
       $scope.join = join
       $scope.estimate = estimate
@@ -124,6 +129,7 @@
       socket.on('update', onJoinUser)
       socket.on('onStart', onJoinUser)
       socket.on('removeDeckSelection', onRemoveDeck)
+      socket.on('reconnect', onReconnect)
     }
 
     function getDecks () {

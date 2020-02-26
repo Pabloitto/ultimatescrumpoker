@@ -15,7 +15,7 @@
     "express": "^4.16.4",
     "glob": "^7.1.4",
     "lodash": "^4.17.14",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "socket.io": "^2.1.1",
     "standard": "^12.0.1"
   },

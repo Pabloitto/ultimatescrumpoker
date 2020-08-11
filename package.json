@@ -42,5 +42,8 @@
       "it",
       "beforeEach"
     ]
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

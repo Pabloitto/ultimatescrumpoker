@@ -32,7 +32,7 @@ body{
     background-color: #337ab7;
     color: white;
     font-size: 2em;
-    line-height: 117px;
+    line-height: 64px;
     cursor: pointer;
     text-align: center;
     border-radius: 8px;
@@ -43,6 +43,7 @@ body{
     right: 1px;
     top:1px;
     bottom: 1px;
+    position: relative;
   }
  .card:hover,
  .card:focus {
@@ -88,4 +89,15 @@ body{
   label.user-name {
     max-width: 50%;
     word-break: break-word;
+  }
+
+  .card-label {
+    position: absolute;
+    top: 25px;
+    font-size: 12px;
+    left: 0px;
+    height: 100%;
+    white-space: break-spaces;
+    width: 100%;
+    line-height: initial;
   }

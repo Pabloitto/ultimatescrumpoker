@@ -28,7 +28,9 @@
 		<div class="col-md-12">
 			<label>Deck :</label>
 			<select class="dropdown-deck" ng-model="selectedDeck" ng-change="changeDeck()">
-				<option ng-repeat="deck in decks" ng-attr-value="{{deck}}">{{deck}}</option>
+				<option ng-repeat="deck in decks" ng-attr-value="{{deck}}">
+          {{getDescriptionByDeck(deck)}}
+        </option>
 			</select>
 		</div>
 	</div>
@@ -37,7 +39,12 @@
 			<div class="row row-top-margin">
 				<div class="col-md-9">
 					<div ng-repeat="card in cards" class="card-container">
-						<div class="card col-md-4" ng-click="estimate(card)">{{card}}</div>
+						<div ng-style="!card.label && {'line-height': '117px'}" class="card col-md-4" ng-click="estimate(card.value)">
+              {{card.value}}
+              <div ng-if="card.label" class="card-label">
+                <p>{{card.label}}</p>
+              </div>
+            </div>
 					</div>
 				</div>
 			</div>

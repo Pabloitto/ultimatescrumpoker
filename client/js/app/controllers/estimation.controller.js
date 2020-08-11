@@ -125,6 +125,7 @@
       $scope.cleanEstimations = cleanEstimations
       $scope.changeDeck = changeDeck
       $scope.allAreEstimated = allAreEstimated
+      $scope.getDescriptionByDeck = getDescriptionByDeck
 
       socket.on('update', onJoinUser)
       socket.on('onStart', onJoinUser)
@@ -142,6 +143,10 @@
 
     function getCardsByDeck (deck) {
       return $.App.Deck[deck].Cards
+    }
+
+    function getDescriptionByDeck(deck) {
+      return $.App.Deck[deck].Description
     }
 
     init()

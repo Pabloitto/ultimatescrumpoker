@@ -8,7 +8,8 @@
   "scripts": {
     "start": "standard && NODE_ENV=prod node server",
     "dev": "standard && NODE_ENV=dev nodemon server",
-    "test": "standard && NODE_ENV=test mocha server/tests/*.test.js"
+    "test": "standard && NODE_ENV=test mocha server/tests/*.test.js",
+    "d:up": "docker-compose up -d"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

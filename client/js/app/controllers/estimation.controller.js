@@ -145,7 +145,7 @@
       return $.App.Deck[deck].Cards
     }
 
-    function getDescriptionByDeck(deck) {
+    function getDescriptionByDeck (deck) {
       return $.App.Deck[deck].Description
     }
 

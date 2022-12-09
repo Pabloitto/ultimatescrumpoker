@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "glob": "^7.1.4",
     "lodash": "^4.17.14",
     "mongoose": "^5.7.5",
